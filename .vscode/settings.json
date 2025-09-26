@@ -1,0 +1,15 @@
+{
+    "explorer.compactFolders": false,
+    "python.analysis.autoFormatStrings": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "never",
+            "source.organizeImports": "always"
+        }
+    },
+    "files.exclude": {
+        "**/__pycache__": true
+    }
+}
