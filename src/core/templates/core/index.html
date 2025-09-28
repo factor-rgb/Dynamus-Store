@@ -1,0 +1,97 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block body_pd %}
+{% endblock body_pd %}
+
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'core:index' %}">Music's World</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+                <!-- { if user.is_authenticated %} -->
+                    <li class="nav-item"><a class="nav-link" href="#">Buscar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'core:profile' %}">Editar Perfil</a></li>
+                    <li class="nav-item"><form action="{% url 'core:logout' %}" method="post">{% csrf_token %}<button type="submit" class="nav-link" style="border: none; background: none;">logout</button></form></li>
+                <!-- { else %} -->
+                    <li class="nav-item"><a class="nav-link" href="{% url 'core:login' %}">Login</a></li>
+                <!-- { endif %} -->
+            </ul>
+        </div>
+    </div>
+    </nav>
+{% endblock navbar %}
+
+{% block content %}
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase">Music's World</h1>
+                    <br>
+                    <h2 class="mx-auto mt-2 mb-5">Aqui Podras Buscar Canciones y Musicas de Youtube Para Distintas Situaciones, Sumergete en el <em>Sonido</em></h2>
+                    <!-- { if user.is_authenticated %} -->
+                        <a class="btn btn-primary" href="#">Buscar Musicas</a>
+                    <!-- { else %} -->
+                        <a class="btn btn-primary" href="{% url 'core:register' %}">Registrate Ahora</a>
+                    <!-- { endif %} -->
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- introduce-->
+    <section class="about-section text-center" id="about">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="text-white mb-4">Musicas Destacadas</h2>
+                    <p class="text-white-50">
+                        Algunas Musical Fueron Escuchadas Por Encima de la Media asi que nos Tomamos la Molestia de Hacer una Lista Si te Interesa, Revisa las
+                        <a href="{% url 'core:login' %}">Musicas Destacadas</a>
+                        y Comentanos Si te Gustaron y/o Vota Por el Genero de la Proxima Semana.
+                    </p>
+                </div>
+            </div>
+            <img class="img-fluid" src="" alt="..." />
+        </div>
+    </section>
+    <!-- page content sides-->
+    
+    <!-- musical news-->
+
+    <!-- messages-->
+    {% if messages %}
+        <div aria-live="polite" aria-atomic="true"
+            class="position-fixed bottom-0 start-50 translate-middle-x p-3"
+            style="z-index: 1080;">
+            {% for message in messages %}
+                <div class="toast align-items-center text-white bg-{{ message.tags }} border-0 mb-2"
+                    role="alert"
+                    data-bs-delay="5000"
+                    data-bs-autohide="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <!-- scrips-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+            toastElList.map(function (toastEl) {
+            const toast = new bootstrap.Toast(toastEl);
+            toast.show();
+            });
+        });
+    </script>
+{% endblock content %}

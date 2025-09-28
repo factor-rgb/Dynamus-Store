@@ -1,0 +1,40 @@
+{% extends 'core/base.html' %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block content %}
+  <div class="modal fade" id="term-cond-page" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-label" >Terminos y Condiciones</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+              El contenido exhibido en este sitio web no es de propiedad de la página,
+              salvo que se indique expresamente lo contrario. Cada obra, recurso, 
+              imagen, video o material compartido pertenece a sus respectivos autores y/o 
+              titulares de derechos, quienes han sido mencionados de manera clara junto a sus 
+              creaciones. Asimismo, se han incluido los enlaces originales hacia las fuentes 
+              correspondientes para garantizar la correcta atribución y acceso directo al contenido. 
+              La página actúa únicamente como un espacio de difusión y referencia, sin reclamar propiedad 
+              intelectual ni responsabilidad sobre la autoría, exactitud o vigencia de dicho material.
+          </p>
+        </div>
+        <div class="modal-footer d-flex align-items-center justify-content-center">
+          <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var modal = new bootstrap.Modal(document.getElementById('term-cond-page'));
+    modal.show();
+  </script>
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
