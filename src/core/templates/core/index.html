@@ -4,28 +4,6 @@
 {% block body_pd %}
 {% endblock body_pd %}
 
-{% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav" >
-    <div class="container px-4 px-lg-5">
-        <a class="navbar-brand" href="{% url 'core:index' %}">Music's World</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto">
-                <!-- { if user.is_authenticated %} -->
-                    <li class="nav-item"><a class="nav-link" href="#">Buscar</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:profile' %}">Editar Perfil</a></li>
-                    <li class="nav-item"><form action="{% url 'core:logout' %}" method="post">{% csrf_token %}<button type="submit" class="nav-link" style="border: none; background: none;">logout</button></form></li>
-                <!-- { else %} -->
-                    <li class="nav-item"><a class="nav-link" href="{% url 'core:login' %}">Login</a></li>
-                <!-- { endif %} -->
-            </ul>
-        </div>
-    </div>
-    </nav>
-{% endblock navbar %}
-
 {% block content %}
     <header class="masthead">
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
@@ -43,6 +21,7 @@
             </div>
         </div>
     </header>
+
     <!-- introduce-->
     <section class="about-section text-center" id="about">
         <div class="container px-4 px-lg-5">
@@ -59,9 +38,6 @@
             <img class="img-fluid" src="" alt="..." />
         </div>
     </section>
-    <!-- page content sides-->
-    
-    <!-- musical news-->
 
     <!-- messages-->
     {% if messages %}

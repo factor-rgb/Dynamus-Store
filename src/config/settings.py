@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cotton',
     'core',
 ]
 
@@ -63,6 +64,15 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'loaders': [
+                'django_cotton.template.loaders.CottonLoader',
+                # luego los otros si los necesitas:
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
+                'builtins': [
+                'django_cotton.templatetags.cotton',
+            ],
         },
     },
 ]
@@ -75,8 +85,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'experimentaldb',
+        'USER': 'root',
+        'PASSWORD': 'FactorRGB',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 

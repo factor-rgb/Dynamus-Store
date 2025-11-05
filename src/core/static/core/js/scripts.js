@@ -1,54 +1,29 @@
-/*!
-* Start Bootstrap - Grayscale v7.0.6 (https://startbootstrap.com/theme/grayscale)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+const menuBtn = document.getElementById('menu-btn');
+const menu = document.getElementById('menu');
+const menuIcon = document.getElementById('menu-icon');
+let menuOpen = false;
 
-window.addEventListener('DOMContentLoaded', event => {
+menuBtn.addEventListener('click', () => {
+  if (!menuOpen) {
+    // Abrir menú
+    menu.style.maxHeight = menu.scrollHeight + 'px';
+    menuOpen = true;
+    menuIcon.innerHTML =
+      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+  } else {
+    // Cerrar menú
+    menu.style.maxHeight = '0px';
+    menuOpen = false;
+    menuIcon.innerHTML =
+      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+  }
+});
 
-    // Navbar shrink function
-    var navbarShrink = function () {
-        const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) {
-            return;
-        }
-        if (window.scrollY === 0) {
-            navbarCollapsible.classList.remove('navbar-shrink')
-        } else {
-            navbarCollapsible.classList.add('navbar-shrink')
-        }
-
-    };
-
-    // Shrink the navbar 
-    navbarShrink();
-
-    // Shrink the navbar when page is scrolled
-    document.addEventListener('scroll', navbarShrink);
-
-    // Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#mainNav');
-    if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
-
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
-    });
-
+// Ajustar en pantallas grandes
+window.addEventListener('resize', () => {
+  if (window.innerWidth >= 768) {
+    menu.style.maxHeight = 'none';
+  } else if (!menuOpen) {
+    menu.style.maxHeight = '0px';
+  }
 });
