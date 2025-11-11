@@ -14,6 +14,17 @@ class CustomAuthenticationForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Nombre de Usuario'
+        self.fields['password'].label = 'Contraseña'
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": (
+                    "w-full border border-gray-300 rounded-lg px-3 py-2 "
+                    "focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                    "focus:border-blue-500 placeholder-gray-400 text-gray-800"
+                ),
+                "placeholder": field.label
+            })
 
 
 class CustomCreationForm(UserCreationForm):
@@ -25,10 +36,20 @@ class CustomCreationForm(UserCreationForm):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
+        self.fields['password1'].label = 'Contraseña'
         self.fields['password2'].label = 'Confirmar Contraseña'
         self.fields["password1"].help_text = ''
         self.fields["password2"].help_text = ''
 
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": (
+                    "w-full border border-gray-300 rounded-lg px-3 py-2 "
+                    "focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                    "focus:border-blue-500 placeholder-gray-400 text-gray-800"
+                ),
+                "placeholder": field.label
+            })
 
 
 class UserProfileForm(forms.ModelForm):
@@ -61,6 +82,16 @@ class UserProfileForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['username'].label = 'Nombre de Usuario'
         self.fields['email'].label = 'Correo Electrónico'
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": (
+                    "w-full border border-gray-300 rounded-lg px-3 py-2 "
+                    "focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                    "focus:border-blue-500 placeholder-gray-400 text-gray-800"
+                ),
+                "placeholder": field.label
+            })
 
     def clean(self):
         cleaned_data = super().clean()

@@ -22,10 +22,11 @@
         <link href="{% static 'core/css/styles.css' %}" rel="stylesheet" />
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body>
+    <body class="bg-gray-200">
         <c-navbar
             brand="Catty's Fundation"
-            brand_url="{% url 'core:index' %}">
+            brand_url="{% url 'core:index' %}"
+        >
 
             <!-- Links de Navegacion-->
             <c-slot name="links">

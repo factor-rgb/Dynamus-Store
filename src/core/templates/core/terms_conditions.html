@@ -1,40 +1,67 @@
-{% extends 'core/base.html' %}
+<div 
+  id="term-cond-page"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  hx-target="this"
+  hx-swap="outerHTML"
+>
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeIn">
+    <!-- boton cerrar -->
+    <div class="flex justify-between items-center border-b p-4">
+      <h5 class="text-lg font-semibold text-gray-800">Términos y Condiciones</h5>
+      <button 
+        type="button" 
+        class="text-gray-500 hover:text-gray-800"
+        onclick="closeModal()"
+      >
+        ✕
+      </button>
+    </div>
 
-{% block navbar %}
-{% endblock navbar %}
+    <!-- Informacion -->
+    <div class="p-5 text-gray-700 space-y-3">
+      <p>
+        Toda la información personal proporcionada por los usuarios
+        será tratada con estricta confidencialidad y cuidado, conforme a las
+        leyes vigentes de protección de datos.
+        Los datos recopilados se utilizarán únicamente para fines relacionados
+        con la adopción de mascotas, el seguimiento de casos y la comunicación
+        entre adoptantes y responsables.
+        Para acceder a ciertas funciones, como solicitar adopciones,
+        el usuario deberá crear una cuenta proporcionando información veraz y actualizada.
+        El usuario es responsable de mantener la confidencialidad de sus datos de acceso
+        y del uso que se haga de su cuenta.
+        En caso de detectar actividad sospechosa, uso indebido, o falsificación de información,
+        la administración se reserva el derecho de suspender o eliminar la cuenta sin previo aviso.
+      </p>
+    </div>
 
-{% block content %}
-  <div class="modal fade" id="term-cond-page" tabindex="-1" aria-labelledby="modal-label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-label" >Terminos y Condiciones</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-              El contenido exhibido en este sitio web no es de propiedad de la página,
-              salvo que se indique expresamente lo contrario. Cada obra, recurso, 
-              imagen, video o material compartido pertenece a sus respectivos autores y/o 
-              titulares de derechos, quienes han sido mencionados de manera clara junto a sus 
-              creaciones. Asimismo, se han incluido los enlaces originales hacia las fuentes 
-              correspondientes para garantizar la correcta atribución y acceso directo al contenido. 
-              La página actúa únicamente como un espacio de difusión y referencia, sin reclamar propiedad 
-              intelectual ni responsabilidad sobre la autoría, exactitud o vigencia de dicho material.
-          </p>
-        </div>
-        <div class="modal-footer d-flex align-items-center justify-content-center">
-          <button type="button" class="btn btn-primary btn-lg" data-bs-dismiss="modal">Aceptar</button>
-        </div>
-      </div>
+    <!-- boton aceptar -->
+    <div class="border-t p-4 flex justify-center">
+      <button 
+        type="button"
+        class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition"
+        onclick="closeModal()"
+      >
+        Aceptar
+      </button>
     </div>
   </div>
+</div>
 
-  <script>
-    var modal = new bootstrap.Modal(document.getElementById('term-cond-page'));
-    modal.show();
-  </script>
-{% endblock content %}
+<script>
+  function closeModal() {
+    const modal = document.getElementById('term-cond-page');
+    modal.classList.add('animate-fadeOut');
+    setTimeout(() => modal.remove(), 200);
+  }
 
-{% block footer %}
-{% endblock footer %}
+  // Animación de entrada/salida
+  document.head.insertAdjacentHTML("beforeend", `
+    <style>
+      @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+      @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
+      .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
+      .animate-fadeOut { animation: fadeOut 0.2s ease-in forwards; }
+    </style>
+  `);
+</script>

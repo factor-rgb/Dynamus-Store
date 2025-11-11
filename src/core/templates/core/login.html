@@ -1,23 +1,18 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" id="form-container">
-        <div class="card shadow-lg p-2 rounded-4 form-card">
-            <div class="card-body text-center">
-                <form method="post">
-                    <legend class="mb-4">Inicia Sesión</legend>
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="d-grid mt-3">
-                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Iniciar Sesión</button>
-                    </div>
-                </form>
-                <hr>
-                <p class="mt-4">
-                    ¿No tienes una cuenta?<br>
-                    <a href="{% url 'core:register' %}" class="text-black fw-bold">Crea tu cuenta</a>
-                </p>
-            </div>
-        </div>
-    </div>
+    <c-card_form
+        legend="Inicia Sesión"
+        button="Iniciar Sesión"
+    >
+        <c-slot name="extra">
+            <p>
+                ¿No tienes una cuenta?<br>
+                <a href="{% url 'core:register' %}"
+                    class="text-[mediumblue] underline hover:text-blue-700 cursor-pointer">
+                    Crea tu cuenta
+                </a>
+            </p>
+        </c-slot>
+    </c-card_form>
 {% endblock content %}

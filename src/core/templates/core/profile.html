@@ -1,18 +1,9 @@
 {% extends 'core/base.html' %}
 
 {% block content %}
-    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center" id="form-container">
-        <div class="card shadow-lg mt-5 mb-5 p-1 rounded-4 form-card">
-            <div class="card-body text-center">
-                <form method="post">
-                    <legend class="mb-4">Opciones de Perfil</legend>
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div class="d-grid mt-3">
-                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Guardar Cambios</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <c-card_form
+        legend="Opciones de Perfil"
+        button="Guardar Cambios"
+    >
+    </c-card_form>
 {% endblock content %}
