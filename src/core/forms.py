@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 
 from django.contrib.auth.models import User
+from .models import Pet
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -119,3 +120,64 @@ class UserProfileForm(forms.ModelForm):
             user.save()
 
         return user
+
+
+class PetForm(forms.ModelForm):
+    class Meta:
+        model = Pet
+        fields = [
+            "name",
+            "age",
+            "breed",
+            "gender",
+            "size",
+            "annotations",
+        ]
+        widgets = {
+            "age": forms.NumberInput(attrs={
+                "min": 0,
+                "max": 99
+            }),
+            "size": forms.NumberInput(attrs={
+                "class": "form-input",
+                "step": "0.01"
+            }),
+            "annotations": forms.Textarea(attrs={
+                "class": "form-textarea",
+                "rows": 4
+            }),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Ejemplo de personalización adicional
+        self.fields["name"].label = "Nombre"
+        self.fields["age"].label = "Edad"
+        self.fields["breed"].label = "Raza"
+        self.fields["gender"].label = "Género"
+        self.fields["size"].label = "Tamaño (kg)"
+        self.fields["annotations"].label = "Anotaciones"
+
+        for field_name, field in self.fields.items():
+            field.widget.attrs.update({
+                "class": (
+                    "w-full border border-gray-300 rounded-lg px-3 py-2 "
+                    "focus:outline-none focus:ring-2 focus:ring-blue-500 "
+                    "focus:border-blue-500 placeholder-gray-400 text-gray-800"
+                ),
+
+                "placeholder": field.label,  # usa el label como placeholder
+            })
+
+    def clean_age(self):
+        age = self.cleaned_data.get("age")
+        if age is not None and age < 0:
+            raise forms.ValidationError("La edad debe ser mayor que 0.")
+        return age
+
+    def clean_size(self):
+        size = self.cleaned_data.get("size")
+        if size is not None and size <= 0:
+            raise forms.ValidationError("El tamaño debe ser mayor que 0.")
+        return size

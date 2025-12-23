@@ -27,3 +27,44 @@ window.addEventListener('resize', () => {
     menu.style.maxHeight = '0px';
   }
 });
+
+function closeModal() {
+  const wrapper = document.getElementById('modal');
+  const panel = document.getElementById('modal-panel');
+  const backdrop = document.getElementById('modal-backdrop');
+
+  if (!wrapper || !panel || !backdrop) return;
+
+  panel.classList.remove('animate-fadeInScale');
+  panel.classList.add('animate-fadeOutScale');
+
+  backdrop.classList.remove('animate-fadeInBackdrop');
+  backdrop.classList.add('animate-fadeOutBackdrop');
+
+  setTimeout(() => {
+    wrapper.remove();
+  }, 220);
+}
+
+document.body.addEventListener('htmx:afterSwap', function (event) {
+  // Solo reaccionar si el modal fue insertado
+  const modal = document.getElementById('modal');
+  if (!modal) return;
+
+  const backdrop = document.getElementById('modal-backdrop');
+  const panel = document.getElementById('modal-panel');
+
+  if (backdrop && panel) {
+    backdrop.classList.add('animate-fadeInBackdrop');
+    panel.classList.add('animate-fadeInScale');
+  }
+});
+
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape') {
+    const modal = document.getElementById('modal');
+    if (modal) {
+      closeModal();
+    }
+  }
+});

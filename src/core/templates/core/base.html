@@ -46,6 +46,7 @@
                     {% else %}
                     <li>
                         <a href="{% url 'core:login' %}" class="block px-3 py-2 rounded w-full text-left text-gray-300 transition duration-500 ease-in-out hover:text-white hover:brightness-125 hover:drop-shadow-[0_0_6px_rgba(255,255,255,0.6)]">Entrar</a>
+                    </li>
                     {% endif %}
                 </ul>
             </c-slot>
@@ -63,11 +64,11 @@
         >
         </c-footer>
 
-        <script src="{% static 'core/js/scripts.js' %}"></script>
         <!-- htmx sript -->
         <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+        <script src="{% static 'core/js/scripts.js' %}"></script>
         <!-- youtube frame -->
-        <script>
+        <!-- <script>
             // Cuando HTMX termina de insertar el modal
             document.body.addEventListener('htmx:afterSwap', function(evt) {
                 if (evt.detail.target.id === "modal-container") {
@@ -99,6 +100,6 @@
                 });
                 }
             });
-        </script>
+        </script> -->
     </body>
 </html>

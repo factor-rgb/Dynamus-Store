@@ -1,17 +1,27 @@
 <div 
-  id="term-cond-page"
-  class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+  id="modal"
+  class="fixed inset-0 z-50 flex items-center justify-center"
   hx-target="this"
   hx-swap="outerHTML"
 >
-  <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeIn">
+  <!-- BACKDROP -->
+  <div id="modal-backdrop" class="absolute inset-0 bg-black/50" onclick="closeModal()"></div>
+  <!-- PANEL (contenido) -->
+  <div
+    id="modal-panel"
+    class="relative z-10 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeInScale"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
     <!-- boton cerrar -->
     <div class="flex justify-between items-center border-b p-4">
-      <h5 class="text-lg font-semibold text-gray-800">Términos y Condiciones</h5>
+      <h5 id="modal-title" class="text-lg font-semibold text-gray-800">Términos y Condiciones</h5>
       <button 
         type="button" 
         class="text-gray-500 hover:text-gray-800"
         onclick="closeModal()"
+        aria-label="Cerrar"
       >
         ✕
       </button>
@@ -47,21 +57,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  function closeModal() {
-    const modal = document.getElementById('term-cond-page');
-    modal.classList.add('animate-fadeOut');
-    setTimeout(() => modal.remove(), 200);
-  }
-
-  // Animación de entrada/salida
-  document.head.insertAdjacentHTML("beforeend", `
-    <style>
-      @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-      @keyframes fadeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.95); } }
-      .animate-fadeIn { animation: fadeIn 0.2s ease-out; }
-      .animate-fadeOut { animation: fadeOut 0.2s ease-in forwards; }
-    </style>
-  `);
-</script>

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ pet.name }}{% endblock %}
+
+{% block content %}
+    <div class="bg-white rounded-lg shadow p-6">
+        <div class="flex items-start justify-between">
+            <div>
+                <h1 class="text-2xl font-bold">{{ pet.name }}</h1>
+                <p class="text-sm text-gray-600">Ingresado: {{ pet.entry_date|date:'d M Y H:i' }}</p>
+            </div>
+        </div>
+
+
+        <dl class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <dt class="text-xs text-gray-500">Edad</dt>
+                <dd class="font-medium">{{ pet.age }} años</dd>
+            </div>
+            <div>
+                <dt class="text-xs text-gray-500">Raza</dt>
+                <dd class="font-medium">{{ pet.breed }}</dd>
+            </div>
+            <div>
+                <dt class="text-xs text-gray-500">Género</dt>
+                <dd class="font-medium">{{ pet.gender }}</dd>
+            </div>
+            <div>
+                <dt class="text-xs text-gray-500">Tamaño</dt>
+                <dd class="font-medium">{{ pet.size }}</dd>
+            </div>
+            <div class="md:col-span-2">
+                <dt class="text-xs text-gray-500">Anotaciones</dt>
+                <dd class="mt-1 text-gray-700">{{ pet.annotations|linebreaksbr }}</dd>
+            </div>
+        </dl>
+        <div class="space-x-2">
+            <a href="{% url 'core:update' pet.pk %}" class="px-3 py-1 border rounded">Editar</a>
+            <!-- <a href="{% url 'core:delete' pet.pk %}" class="px-3 py-1 border rounded text-red-600">Eliminar</a> -->
+            <button 
+                hx-get="{% url 'core:delete' object.pk %}" 
+                hx-target="body" 
+                hx-swap="beforeend"
+                class="px-3 py-2 bg-red-600 text-white rounded">
+                Eliminar
+            </button>
+        </div>
+    </div>
+{% endblock %}

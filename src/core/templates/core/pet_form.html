@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    {% if form.instance.pk %}
+        <c-card_form
+            legend="Editar Mascota"
+            button="Guardar Cambios"
+        >
+        </c-card_form>
+    {% else %}
+        <c-card_form
+            legend="Registrar Mascota"
+            button="Guardar"
+        >
+        </c-card_form>
+    {% endif %}
+{% endblock content %}

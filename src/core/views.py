@@ -10,9 +10,10 @@ from django.db.models.base import Model as Model
 from django.forms import BaseModelForm
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .models import Pet
 
-from .forms import CustomAuthenticationForm, CustomCreationForm, UserProfileForm
+from .forms import CustomAuthenticationForm, CustomCreationForm, UserProfileForm, PetForm
 
 @login_not_required
 def index(request):
@@ -64,3 +65,42 @@ class UpdateProfileView(UpdateView):
         update_session_auth_hash(self.request, self.request.user)
         messages.success(self.request, "Perfil actualizado correctamente")
         return response
+
+
+
+# Lista de mascotas
+class PetListView(ListView):
+    model = Pet
+    template_name = "core/pet_list.html"
+    context_object_name = "pets"
+    paginate_by = 10  # Opcional
+
+
+# Detalle de una mascota
+class PetDetailView(DetailView):
+    model = Pet
+    template_name = "core/pet_detail.html"
+    context_object_name = "pet"
+
+
+# Crear mascota
+class PetCreateView(CreateView):
+    model = Pet
+    form_class = PetForm
+    template_name = "core/pet_form.html"
+    success_url = reverse_lazy("core:list")
+
+
+# Editar mascota
+class PetUpdateView(UpdateView):
+    model = Pet
+    form_class = PetForm
+    template_name = "core/pet_form.html"
+    success_url = reverse_lazy("core:list")
+
+
+# Eliminar mascota
+class PetDeleteView(DeleteView):
+    model = Pet
+    template_name = "core/pet_confirm_delete.html"
+    success_url = reverse_lazy("core:list")
