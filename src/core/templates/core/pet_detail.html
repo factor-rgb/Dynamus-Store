@@ -29,21 +29,25 @@
                 <dt class="text-xs text-gray-500">Tamaño</dt>
                 <dd class="font-medium">{{ pet.size }}</dd>
             </div>
-            <div class="md:col-span-2">
-                <dt class="text-xs text-gray-500">Anotaciones</dt>
-                <dd class="mt-1 text-gray-700">{{ pet.annotations|linebreaksbr }}</dd>
-            </div>
+            {% if user.employee.access_level >= 2%}
+                <div class="md:col-span-2">
+                    <dt class="text-xs text-gray-500">Anotaciones</dt>
+                    <dd class="mt-1 text-gray-700">{{ pet.annotations|linebreaksbr }}</dd>
+                </div>
+            {% endif %}
         </dl>
-        <div class="space-x-2">
-            <a href="{% url 'core:update' pet.pk %}" class="px-3 py-1 border rounded">Editar</a>
-            <!-- <a href="{% url 'core:delete' pet.pk %}" class="px-3 py-1 border rounded text-red-600">Eliminar</a> -->
-            <button 
-                hx-get="{% url 'core:delete' object.pk %}" 
-                hx-target="body" 
-                hx-swap="beforeend"
-                class="px-3 py-2 bg-red-600 text-white rounded">
-                Eliminar
-            </button>
-        </div>
+        {% if user.employee.access_level >= 3%}
+            <div class="space-x-2">
+                <a href="{% url 'core:update' pet.pk %}" class="px-3 py-1 border rounded">Editar</a>
+                <button
+                    hx-get="{% url 'core:delete' object.pk %}" 
+                    hx-target="body" 
+                    hx-swap="beforeend"
+                    class="px-3 py-2 bg-red-600 text-white rounded">
+                    Eliminar
+                </button>
+            </div>
+        {% endif %}
+
     </div>
 {% endblock %}
