@@ -1,8 +1,8 @@
 <div class="grow flex items-center justify-center">
-    <div class="bg-white shadow-lg p-6 rounded-2xl w-full max-w-md">
+    <div class="bg-[#FAF7F2] shadow-lg p-6 rounded-2xl w-full max-w-md border-2 border-[#A8B5A2]">
         <div class="text-center">
             <form method="post" class="space-y-4">
-                <legend class="text-2xl font-semibold mb-4 text-gray-800">{{ legend }}</legend>
+                <legend class="text-2xl font-semibold mb-4">{{ legend }}</legend>
                 {% csrf_token %}
                 {{ form.as_p }}
                 {{ extra }}
@@ -10,7 +10,7 @@
                     <button 
                         id="submitButton" 
                         type="submit" 
-                        class="w-full bg-blue-600 hover:bg-blue-700
+                        class="w-full bg-[#D98C5F] hover:bg-[#B97249]
                         text-white font-medium py-2.5 rounded-lg
                         transition duration-200"
                     >
