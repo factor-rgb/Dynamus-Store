@@ -9,17 +9,17 @@
   <!-- PANEL (contenido) -->
   <div
     id="modal-panel"
-    class="relative z-10 bg-white rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeInScale"
+    class="relative z-10 bg-[#FAF7F2] rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeInScale"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
   >
-    <!-- boton cerrar -->
+    <!-- boton cerrar text-[#D98C5F] hover:text-[#B97249]-->
     <div class="flex justify-between items-center border-b p-4">
-      <h5 id="modal-title" class="text-lg font-semibold text-gray-800">Términos y Condiciones</h5>
+      <h5 id="modal-title" class="text-lg font-semibold">Términos y Condiciones</h5>
       <button 
         type="button" 
-        class="text-gray-500 hover:text-gray-800"
+        class="text-[#D98C5F] hover:text-[#B97249] text-2xl font-semibold"
         onclick="closeModal()"
         aria-label="Cerrar"
       >
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Informacion -->
-    <div class="p-5 text-gray-700 space-y-3">
+    <div class="p-5 space-y-3">
       <p>
         Toda la información personal proporcionada por los usuarios
         será tratada con estricta confidencialidad y cuidado, conforme a las
@@ -49,7 +49,7 @@
     <div class="border-t p-4 flex justify-center">
       <button 
         type="button"
-        class="bg-blue-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-blue-700 transition"
+        class="bg-[#D98C5F] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#B97249] transition"
         onclick="closeModal()"
       >
         Aceptar
