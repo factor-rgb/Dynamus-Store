@@ -5,70 +5,359 @@
 {% endblock body_pd %}
 
 {% block content %}
-    <header class="masthead">
-        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-            <div class="d-flex justify-content-center">
-                <div class="text-center">
-                    <h1 class="mx-auto my-0 text-uppercase">Music's World</h1>
-                    <br>
-                    <h2 class="mx-auto mt-2 mb-5">Aqui Podras Buscar Canciones y Musicas de Youtube Para Distintas Situaciones, Sumergete en el <em>Sonido</em></h2>
-                    <!-- { if user.is_authenticated %} -->
-                        <a class="btn btn-primary" href="#">Buscar Musicas</a>
-                    <!-- { else %} -->
-                        <a class="btn btn-primary" href="{% url 'core:register' %}">Registrate Ahora</a>
-                    <!-- { endif %} -->
-                </div>
+    <header class="relative w-full overflow-hidden">
+
+        <div id="slider" class="relative w-full overflow-hidden group">
+
+        <div id="sliderTrack" 
+            class="flex transition-transform duration-700 ease-in-out">
+
+            <!-- Slide -->
+            <div class="w-full flex-shrink-0">
+                <a href="{% url 'core:list' %}" class="block w-full h-full">
+                    <img src="{% static 'core/assets/img/logo.png' %}" 
+                        class="w-full h-[27rem] md:h-[33rem]">
+                </a>
             </div>
+
+            <!-- Slide -->
+            <div class="w-full flex-shrink-0">
+                <a href="https://www.youtube.com" class="block w-full h-full">
+                    <img src="{% static 'core/assets/img/example.png' %}" 
+                        class="w-full h-[27rem] md:h-[33rem]">
+                </a>
+            </div>
+
+            <!-- Slide -->
+            <div class="w-full flex-shrink-0">
+                <a href="https://www.youtube.com" class="block w-full h-full">
+                    <img src="{% static 'core/assets/img/example2.png' %}" 
+                        class="w-full h-[27rem] md:h-[33rem]">
+                </a>
+            </div>
+
         </div>
+
+            <!-- left button -->
+            <button id="prevBtn" 
+                class="absolute left-4 top-1/2 -translate-y-1/2 
+                    bg-[#C8A97E] hover:bg-amber-100
+                    text-amber-800 px-5 py-3 rounded-full text-xl
+                    opacity-0 group-hover:opacity-100
+                    transition-opacity duration-300">
+                ❮
+            </button>
+
+            <!-- right button -->
+            <button id="nextBtn"
+                class="absolute right-4 top-1/2 -translate-y-1/2 
+                    bg-[#C8A97E] hover:bg-amber-100 
+                    text-amber-800 px-5 py-3 rounded-full text-xl
+                    opacity-0 group-hover:opacity-100
+                    transition-opacity duration-300">
+                ❯
+            </button>
+
+            <!-- indicators -->
+            <div id="indicators"
+                class="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 gap-2">
+            </div>
+
+        </div>
+
+        <!-- separator line -->
+        <div class="w-full h-[9px] bg-gradient-to-r 
+                from-transparent via-amber-500 to-transparent">
+        </div>
+
     </header>
 
-    <!-- introduce-->
-    <section class="about-section text-center" id="about">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="text-white mb-4">Musicas Destacadas</h2>
-                    <a href="{% url 'core:list' %}" class="text-xl font-semibold">Mi Clínica / Refugio</a>
-                    <p class="text-white-50">
-                        Algunas Musical Fueron Escuchadas Por Encima de la Media asi que nos Tomamos la Molestia de Hacer una Lista Si te Interesa, Revisa las
-                        <a href="{% url 'core:login' %}">Musicas Destacadas</a>
-                        y Comentanos Si te Gustaron y/o Vota Por el Genero de la Proxima Semana.
-                    </p>
-                </div>
+    <!-- take a look section-->
+    <section class="text-center my-10 md:my-20">
+        <h2 class="relative left-1/2 -translate-x-1/2
+                text-4xl md:text-5xl font-extrabold 
+                text-center
+                text-amber-800 
+                bg-amber-100 
+                border-y-2 border-amber-300 
+                px-4 py-2 md:px-8 md:py-4 
+                shadow-lg 
+                tracking-wide
+                mb-14">
+            Echa un vistazo a nuestras Mascotas
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-8">
+            <!-- image -->
+            <div class="space-y-3 w-[94%] md:w-[80%] lg:w-[70%] mx-auto md:mt-4">
+                <h3 class="text-[1.7rem] font-semibold mb-4">Cuidados y vacunados</h3>
+                <a href="https://www.youtube.com/watch?v=f-BEiZ4P-74" target="_blank">
+                    <img 
+                        class="w-full h-[60%] border-4 border-amber-700 object-cover rounded-xl shadow-md 
+                        hover:scale-110 hover:rotate-3 hover:border-orange-500 
+                        transition duration-300" 
+                        src="{% static 'core/assets/img/dog_img.jpg' %}" 
+                        alt="perro con gafas y gorra"
+                    >
+                </a>
             </div>
-            <img class="img-fluid" src="" alt="..." />
+
+            <!-- image -->
+            <div class="space-y-3 w-[94%] md:w-[80%] lg:w-[70%] mx-auto md:mt-12">
+                <h3 class="text-[1.7rem] font-semibold mb-4">Entretenidos</h3>
+                <a href="https://www.youtube.com/watch?v=eJTSELANAxA" target="_blank">
+                    <img 
+                        class="w-full h-[60%] border-4 border-amber-700 object-cover rounded-xl shadow-md 
+                        hover:scale-110 hover:-rotate-3 hover:border-orange-500 
+                        transition duration-300" 
+                        src="{% static 'core/assets/img/racoon_img.jpg' %}" 
+                        alt="mapache con gafas en lavanderia"
+                    >
+                </a>
+            </div>
+
+            <!-- image -->
+            <div class="space-y-3 w-[94%] md:w-[80%] lg:w-[70%] mx-auto md:mt-2">
+                <h3 class="text-[1.7rem] font-semibold mb-4">Entrenados y alimentados</h3>
+                <a href="https://www.youtube.com/watch?v=WfXo94J_7J4" target="_blank">
+                    <img
+                        class="w-full h-[60%] border-4 border-amber-700 object-cover rounded-xl shadow-md 
+                        hover:scale-110 hover:rotate-3 hover:border-orange-500 
+                        transition duration-300"
+                        src="{% static 'core/assets/img/cat_img.jpg' %}" 
+                        alt="gatito adorable con armadura de minecraft"
+                    >
+                </a>
+            </div>
         </div>
+    </section>
+
+    <!-- roadmap Section-->
+    <section class="flex-1 flex flex-col items-center">
+        <h2 class="w-screen relative left-1/2 -translate-x-1/2 
+                text-4xl md:text-5xl font-extrabold 
+                text-center
+                text-amber-800 
+                bg-amber-100 
+                border-y-2 border-amber-300 
+                px-8 py-4 
+                shadow-lg 
+                tracking-wide
+                mb-14">
+            Pasos para adoptar un compañero peludo
+        </h2>
+
+        <h2 class="bg-white 
+                text-amber-700 
+                border-2
+                border-amber-400
+                rounded-full 
+                px-8 py-4 
+                shadow-lg 
+                inline-block 
+                text-center 
+                font-medium 
+                text-xl md:text-2xl 
+                border border-amber-100">
+            Entrar en la pagina
+        </h2>
+
+        <div class="relative max-w-6xl py-14">
+            <!-- vertical line -->
+            <div class="absolute left-1/2 top-0 h-full w-[3px] bg-[#A8B5A2] -translate-x-1/2"></div>
+
+            <!-- STEP 1 -->
+            <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
+
+                <!-- card -->
+                <div class="w-1/2 mx-auto md:mx-0 md:mr-auto pr-0 md:pr-16 flex justify-center md:justify-end step">
+                    <div class="bg-white shadow-lg border-2 border-orange-400 rounded-xl p-6 w-80 text-center">
+                        <h2 class="text-xl font-bold">Paso 1</h2>
+                        <div class="h-1 w-16 md:w-16 bg-orange-400 mx-auto my-2"></div>
+                        <p>Buscar a tu colega ideal en la lista de adopciones</p>
+                    </div>
+                </div>
+
+                <!-- point -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+
+                <!-- line -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>
+
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
+
+                <!-- point -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+
+                <!-- line -->
+                <div class="hidden md:flex absolute left-1/2 w-16 h-[3px] bg-orange-400"></div>
+
+                <!-- card -->
+                <div class="w-1/2 mx-auto md:mx-0 md:ml-auto pl-0 md:pl-16 ml-auto flex justify-center md:justify-start">
+                    <div class="bg-white shadow-lg border-2 border-orange-400 rounded-xl p-6 w-80 text-center">
+                        <h2 class="text-xl font-bold">Paso 2</h2>
+                        <div class="h-1 w-16 md:w-16 bg-orange-400 mx-auto my-2"></div>
+                        <p>Iniciar Sesion <br>o<br> crear una cuenta</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
+
+                <!-- card -->
+                <div class="w-1/2 mx-auto md:mx-0 md:mr-auto pr-0 md:pr-16 flex justify-center md:justify-end">
+                    <div class="bg-white shadow-lg border-2 border-orange-400 rounded-xl p-6 w-80 text-center">
+                        <h2 class="text-xl font-bold">Paso 3</h2>
+                        <div class="h-1 w-16 md:w-16 bg-orange-400 mx-auto my-2"></div>
+                        <p>Solicitar adoptar a tu colega</p>
+                    </div>
+                </div>
+
+                <!-- point -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+
+                <!-- line -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>
+
+            </div>
+
+            <!-- STEP 4 -->
+            <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
+
+                <!-- point -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+
+                <!-- line -->
+                <div class="hidden md:flex absolute left-1/2 w-16 h-[3px] bg-orange-400"></div>
+
+                <!-- card -->
+                <div class="w-1/2 mx-auto md:mx-0 md:ml-auto pl-0 md:pl-16 ml-auto flex justify-center md:justify-start">
+                    <div class="bg-white shadow-lg border-2 border-orange-400 rounded-xl p-6 w-80 text-center">
+                        <h2 class="text-xl font-bold">Paso 4</h2>
+                        <div class="h-1 w-16 md:w-16 bg-orange-400 mx-auto my-2"></div>
+                        <p>Esperar respuesta de la solicitud de adopcion</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STEP 5 -->
+            <div class="step relative flex items-center opacity-0 translate-y-10 transition-all duration-700">
+
+                <!-- card -->
+                <div class="w-1/2 mx-auto md:mx-0 md:mr-auto pr-0 md:pr-16 flex justify-center md:justify-end">
+                    <div class="bg-white shadow-lg border-2 border-orange-400 rounded-xl p-6 w-80 text-center">
+                        <h2 class="text-xl font-bold">Paso 5</h2>
+                        <div class="h-1 w-16 md:w-16 bg-orange-400 mx-auto my-2"></div>
+                        <p>Ir a buscar a tu colega peludo</p>
+                    </div>
+                </div>
+
+                <!-- point -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+
+                <!-- line -->
+                <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>
+
+            </div>
+
+        </div>
+
+        <h2 class="bg-white 
+                text-amber-700 
+                border-2
+                border-amber-400
+                rounded-full 
+                px-8 py-4 
+                shadow-lg 
+                inline-block 
+                text-center 
+                font-medium 
+                text-xl md:text-2xl 
+                border border-amber-100">
+            Querer y amar a tu colega peludo
+        </h2>
+    </section>
+
+    <!-- about section -->
+    <section class="text-center py-16">
+
+        <h2 class="relative left-1/2 -translate-x-1/2
+                text-4xl md:text-5xl font-extrabold 
+                text-center
+                text-amber-800 
+                bg-amber-100 
+                border-y-2 border-amber-300 
+                px-8 py-4 
+                shadow-lg 
+                tracking-wide
+                mb-14">
+            Sobre Nosotros
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- frameless card -->
+            <div class="space-y-3 w-[94%] md:w-[80%] lg:w-[70%] mx-auto">
+                <h3 class="text-[1.5rem] font-semibold">Origen</h3>
+                <div class="flex items-center justify-center mt-3 mb-4 md:mt-4 md:mb-12">
+                    <div class="h-1 w-14 bg-orange-400 hidden md:block"></div>
+                    <div class="h-1 w-32 md:w-32 bg-amber-400 mx-4"></div>
+                    <div class="h-1 w-14 bg-orange-400 hidden md:block"></div>
+                </div>
+                <p class="leading-relaxed">
+                    Empezamos como un Grupo de amigos fanaticos de los animales con deseos de ayudar 
+                    a los animales abandonados a encontrar un hogar donde vivir iniciamos un refugio
+                    con la ayuda de una veterinaria local y fuimos expandiendonos con los fondos recaudados
+                    en eventos hasta tener cedes a lo largo del estado.
+                </p>
+            </div>
+
+            <!-- frameless card -->
+            <div class="space-y-3 w-[94%] md:w-[80%] lg:w-[70%] mx-auto">
+                <h3 class="text-[1.5rem] font-semibold">Objetivos</h3>
+                <div class="flex items-center justify-center mt-3 mb-4 md:mt-4 md:mb-12">
+                    <div class="h-1 w-14 bg-orange-400 hidden md:block"></div>
+                    <div class="h-1 w-32 md:w-32 bg-amber-400 mx-4"></div>
+                    <div class="h-1 w-14 bg-orange-400 hidden md:block"></div>
+                </div>
+                <p class="leading-relaxed">
+                    Nuestro objetico principal es y siempre sera el cuidado de los animales, pero aparte
+                    tambien tenemos objetivos como salvar a animales necesitados o en estado de ayuda,
+                    abarcar la mayor cantidad de terreno posible para encontrar a los animales y
+                    los mejores dueños de mascotas.
+                </p>
+            </div>
+        </div>
+
     </section>
 
     <!-- messages-->
     {% if messages %}
-        <div aria-live="polite" aria-atomic="true"
-            class="position-fixed bottom-0 start-50 translate-middle-x p-3"
-            style="z-index: 1080;">
-            {% for message in messages %}
-                <div class="toast align-items-center text-white bg-{{ message.tags }} border-0 mb-2"
-                    role="alert"
-                    data-bs-delay="5000"
-                    data-bs-autohide="true">
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            {{ message }}
-                        </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                                data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
+        {% for message in messages %}
+            <div id="toast"
+                class="flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-white
+                {% if message.tags == 'success' %} bg-green-500
+                {% elif message.tags == 'error' %} bg-red-500
+                {% elif message.tags == 'warning' %} bg-yellow-500
+                {% else %} bg-blue-500 {% endif %}
+                opacity-0 translate-y-5 transition-all duration-300">
+
+                <div class="flex-1">
+                    {{ message }}
                 </div>
-            {% endfor %}
-        </div>
+
+                <button id="closeToast" class="text-white font-bold">
+                    ✕
+                </button>
+            </div>
+        {% endfor %}
+    </div>
     {% endif %}
-    <!-- scrips-->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const toastElList = [].slice.call(document.querySelectorAll('.toast'));
-            toastElList.map(function (toastEl) {
-            const toast = new bootstrap.Toast(toastEl);
-            toast.show();
-            });
-        });
-    </script>
 {% endblock content %}
