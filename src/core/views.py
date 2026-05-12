@@ -7,13 +7,11 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_not_required # type:ignore
 from django.contrib.auth import update_session_auth_hash, login
 from django.db.models.base import Model as Model
-from django.forms import BaseModelForm
-from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Pet
-
 from .forms import CustomAuthenticationForm, CustomCreationForm, UserProfileForm, PetForm
+
 
 @login_not_required
 def index(request):
@@ -67,23 +65,19 @@ class UpdateProfileView(UpdateView):
         return response
 
 
-
-# Lista de mascotas
 class PetListView(ListView):
     model = Pet
     template_name = "core/pet_list.html"
     context_object_name = "pets"
-    paginate_by = 10  # Opcional
+    paginate_by = 12
 
 
-# Detalle de una mascota
 class PetDetailView(DetailView):
     model = Pet
     template_name = "core/pet_detail.html"
     context_object_name = "pet"
 
 
-# Crear mascota
 class PetCreateView(CreateView):
     model = Pet
     form_class = PetForm
@@ -91,7 +85,6 @@ class PetCreateView(CreateView):
     success_url = reverse_lazy("core:list")
 
 
-# Editar mascota
 class PetUpdateView(UpdateView):
     model = Pet
     form_class = PetForm
@@ -99,7 +92,6 @@ class PetUpdateView(UpdateView):
     success_url = reverse_lazy("core:list")
 
 
-# Eliminar mascota
 class PetDeleteView(DeleteView):
     model = Pet
     template_name = "core/pet_confirm_delete.html"
