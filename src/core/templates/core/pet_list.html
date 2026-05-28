@@ -127,7 +127,6 @@
                         duration-300
                         ease-out
                         w-full
-
                         hover:scale-105
                         hover:shadow-xl
                         active:scale-95
@@ -142,26 +141,33 @@
                         ">
                             {{ pet.name|capfirst }}
                         </h2>
-                        <p class="">
+
+                        <p>
                             <strong>Edad:</strong><br>
                             {{ pet.age }} años
                         </p>
-                        <p class="">
+
+                        <p>
                             <strong>Raza:</strong><br>
-                            {{ pet.breed }}
+                            {{ pet.breed.name|capfirst }} - 
+                            {{ pet.breed.fur.primary_color|capfirst }}
+                            {{ pet.breed.fur.secondary_color|default:"" }}
                         </p>
-                        <p class="">
+
+                        <p>
                             <strong>Sexo:</strong><br>
-                            {{ pet.gender }}
+                            {{ pet.gender|capfirst }}
                         </p>
-                        <p class="">
-                            <strong>Tamaño:</strong><br>
+
+                        <p>
+                            <strong>Tamaño (kg):</strong><br>
                             {{ pet.size }}
                         </p>
-                        {% if user.employee.access_level >= 3%}
+
+                        {% if user.employee.access_level >= 2%}
                             <p class="mt-2 truncate">
                                 <strong>Anotaciones:</strong><br>
-                                {{ pet.annotations|default:"No hay anotaciones registradas" }}
+                                {{ pet.annotations|default:"No hay anotaciones registradas"|capfirst }}
                             </p>
                         {% endif %}
                     </article>

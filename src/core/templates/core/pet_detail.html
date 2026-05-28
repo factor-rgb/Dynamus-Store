@@ -1,53 +1,107 @@
 {% extends 'core/base.html' %}
 
-{% block title %}{{ pet.name }}{% endblock %}
+{% block title %}{{ pet.name|capfirst }}{% endblock %}
 
 {% block content %}
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="flex items-start justify-between">
-            <div>
-                <h1 class="text-2xl font-bold">{{ pet.name }}</h1>
-                <p class="text-sm text-gray-600">Ingresado: {{ pet.entry_date|date:'d M Y H:i' }}</p>
+    <div class="grow flex items-center justify-center my-16 mx-4 md:mx-0">
+        <div class="bg-white shadow-lg p-6 rounded-2xl w-full max-w-md border-2 border-amber-600">
+            <div class="text-center">
+                <div>
+                    <h1 class="text-3xl font-bold mb-4">{{ pet.name|capfirst }}</h1>
+                    <p class="font-medium">Ingresado: {{ pet.entry_date|date:'d M Y' }}</p>
+                </div>
+
+                <!-- shows the pet data and extra info if the user has permissions -->
+                <dl class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <dt><strong>Edad:</strong></dt>
+                        <dd class="font-medium">{{ pet.age }} years</dd>
+                    </div>
+
+                    <div>
+                        <dt><strong>Raza:</strong></dt>
+                        <dd class="font-medium">{{ pet.breed.name|capfirst }}</dd>
+                    </div>
+
+                    <div>
+                        {% if pet.breed.fur.secondary_color %}
+                            <dt><strong>Colores:</strong></dt>
+                            <dd class="font-medium">
+                                {{ pet.breed.fur.primary_color|capfirst }} y
+                                {{ pet.breed.fur.secondary_color }}
+                            </dd>
+                        {% else %}
+                            <dt><strong>Color:</strong></dt>
+                            <dd class="font-medium">{{ pet.breed.fur.primary_color|capfirst }}</dd>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% if pet.breed.eyes_color.heterochromia %}
+                            <dt><strong>Colores de ojos:</strong></dt>
+                            <dd class="font-medium">
+                                D:{{ pet.breed.eyes_color.right_eye_color|capfirst }}
+                                I:{{ pet.breed.eyes_color.left_eye_color|capfirst }}
+                            </dd>
+                        {% else %}
+                            <dt><strong>Color de ojos:</strong></dt>
+                            <dd class="font-medium">{{ pet.breed.eyes_color|capfirst }}</dd>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <dt><strong>Patron de pelaje:</strong></dt>
+                        <dd class="font-medium">{{ pet.breed.fur.pattern|default:"sin pelaje"|capfirst }}</dd>
+                    </div>
+
+                    <div>
+                        <dt><strong>Forma de pelaje:</strong></dt>
+                        <dd class="font-medium">{{ pet.breed.fur.shape|default:"sin pelaje"|capfirst }}</dd>
+                    </div>
+
+                    <div>
+                        <dt><strong>Sexo:</strong></dt>
+                        <dd class="font-medium">{{ pet.gender|capfirst }}</dd>
+                    </div>
+
+                    <div>
+                        <dt><strong>Tamaño (kg):</strong></dt>
+                        <dd class="font-medium">{{ pet.size }}</dd>
+                    </div>
+
+                    {% if user.employee.access_level >= 2%}
+                        <div class="md:col-span-2 my-4">
+                            <dt><strong>Anotaciones</strong></dt>
+                            <dd class="font-medium">
+                                {{ pet.annotations|default:"no hay anotaciones registradas"|capfirst }}
+                            </dd>
+                        </div>
+                    {% endif %}
+                </dl>
+
+                <!-- if the user has permissions, shows the edit and delete buttons -->
+                {% if user.employee.access_level >= 3%}
+                    <div class="space-x-2 mt-4">
+                        <a 
+                            href="{% url 'core:update' pet.pk %}" 
+                            class="inline-flex items-center px-3 py-2 border bg-[#D98C5F] hover:bg-[#B97249]
+                                text-white font-medium rounded-lg
+                                transition duration-200 justify-center">
+                            Editar
+                        </a>
+
+                        <button
+                            hx-get="{% url 'core:delete' object.pk %}" 
+                            hx-target="body" 
+                            hx-swap="beforeend"
+                            class="inline-flex items-center px-3 py-2 border bg-red-600 hover:bg-red-700
+                                text-white font-medium rounded-lg
+                                transition duration-200 justify-center">
+                            Eliminar
+                        </button>
+                    </div>
+                {% endif %}
             </div>
         </div>
-
-
-        <dl class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <dt class="text-xs text-gray-500">Edad</dt>
-                <dd class="font-medium">{{ pet.age }} años</dd>
-            </div>
-            <div>
-                <dt class="text-xs text-gray-500">Raza</dt>
-                <dd class="font-medium">{{ pet.breed }}</dd>
-            </div>
-            <div>
-                <dt class="text-xs text-gray-500">Género</dt>
-                <dd class="font-medium">{{ pet.gender }}</dd>
-            </div>
-            <div>
-                <dt class="text-xs text-gray-500">Tamaño</dt>
-                <dd class="font-medium">{{ pet.size }}</dd>
-            </div>
-            {% if user.employee.access_level >= 2%}
-                <div class="md:col-span-2">
-                    <dt class="text-xs text-gray-500">Anotaciones</dt>
-                    <dd class="mt-1 text-gray-700">{{ pet.annotations|linebreaksbr }}</dd>
-                </div>
-            {% endif %}
-        </dl>
-        {% if user.employee.access_level >= 3%}
-            <div class="space-x-2">
-                <a href="{% url 'core:update' pet.pk %}" class="px-3 py-1 border rounded">Editar</a>
-                <button
-                    hx-get="{% url 'core:delete' object.pk %}" 
-                    hx-target="body" 
-                    hx-swap="beforeend"
-                    class="px-3 py-2 bg-red-600 text-white rounded">
-                    Eliminar
-                </button>
-            </div>
-        {% endif %}
-
     </div>
 {% endblock %}
