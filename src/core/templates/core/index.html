@@ -12,26 +12,26 @@
         <div id="sliderTrack" 
             class="flex transition-transform duration-700 ease-in-out">
 
-            <!-- Slide -->
+            <!-- Slide_1 -->
             <div class="w-full flex-shrink-0">
                 <a href="{% url 'core:list' %}" class="block w-full h-full">
-                    <img src="{% static 'core/assets/img/logo.png' %}" 
+                    <img src="{% static 'core/assets/img/slide_1.png' %}" 
                         class="w-full h-[27rem] md:h-[33rem]">
                 </a>
             </div>
 
-            <!-- Slide -->
+            <!-- Slide_2 -->
             <div class="w-full flex-shrink-0">
                 <a href="https://www.youtube.com" class="block w-full h-full">
-                    <img src="{% static 'core/assets/img/example.png' %}" 
+                    <img src="{% static 'core/assets/img/slide_2.png' %}" 
                         class="w-full h-[27rem] md:h-[33rem]">
                 </a>
             </div>
 
-            <!-- Slide -->
+            <!-- Slide_3 -->
             <div class="w-full flex-shrink-0">
                 <a href="https://www.youtube.com" class="block w-full h-full">
-                    <img src="{% static 'core/assets/img/example2.png' %}" 
+                    <img src="{% static 'core/assets/img/slide_3.png' %}" 
                         class="w-full h-[27rem] md:h-[33rem]">
                 </a>
             </div>
@@ -43,7 +43,7 @@
                 class="absolute left-4 top-1/2 -translate-y-1/2 
                     bg-[#C8A97E] hover:bg-amber-100
                     text-amber-800 px-5 py-3 rounded-full text-xl
-                    opacity-0 group-hover:opacity-100
+                    opacity-0 lg:group-hover:opacity-100
                     transition-opacity duration-300">
                 ❮
             </button>
@@ -53,14 +53,16 @@
                 class="absolute right-4 top-1/2 -translate-y-1/2 
                     bg-[#C8A97E] hover:bg-amber-100 
                     text-amber-800 px-5 py-3 rounded-full text-xl
-                    opacity-0 group-hover:opacity-100
+                    opacity-0 lg:group-hover:opacity-100
                     transition-opacity duration-300">
                 ❯
             </button>
 
             <!-- indicators -->
             <div id="indicators"
-                class="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 gap-2">
+                class="hidden md:flex absolute bottom-4 left-1/2 -translate-x-1/2 gap-2 
+                    opacity-0 lg:group-hover:opacity-100
+                    transition-opacity duration-300">
             </div>
 
         </div>
@@ -164,7 +166,7 @@
 
         <div class="relative max-w-6xl py-14">
             <!-- vertical line -->
-            <div class="absolute left-1/2 top-0 h-full w-[3px] bg-[#A8B5A2] -translate-x-1/2"></div>
+            <div class="absolute left-1/2 top-0 h-full w-[3px] bg-emerald-500 -translate-x-1/2"></div>
 
             <!-- STEP 1 -->
             <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
@@ -179,7 +181,7 @@
                 </div>
 
                 <!-- point -->
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-emerald-500 shadow"></div>
 
                 <!-- line -->
                 <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>
@@ -190,7 +192,7 @@
             <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
 
                 <!-- point -->
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-emerald-500 shadow"></div>
 
                 <!-- line -->
                 <div class="hidden md:flex absolute left-1/2 w-16 h-[3px] bg-orange-400"></div>
@@ -219,7 +221,7 @@
                 </div>
 
                 <!-- point -->
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-emerald-500 shadow"></div>
 
                 <!-- line -->
                 <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>
@@ -230,7 +232,7 @@
             <div class="step relative mb-14 md:mb-4 flex items-center opacity-0 translate-y-10 transition-all duration-700">
 
                 <!-- point -->
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-emerald-500 shadow"></div>
 
                 <!-- line -->
                 <div class="hidden md:flex absolute left-1/2 w-16 h-[3px] bg-orange-400"></div>
@@ -259,7 +261,7 @@
                 </div>
 
                 <!-- point -->
-                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-[#A8B5A2] shadow"></div>
+                <div class="hidden md:flex absolute left-1/2 -translate-x-1/2 w-6 h-6 bg-orange-400 rounded-full border-4 border-emerald-500 shadow"></div>
 
                 <!-- line -->
                 <div class="hidden md:flex absolute left-1/2 -translate-x-full w-16 h-[3px] bg-orange-400"></div>

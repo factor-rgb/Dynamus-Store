@@ -156,7 +156,17 @@ prevBtn.addEventListener("click", ()=>{
 
 // AUTOPLAY
 function startAutoplay(){
-    autoplayInterval = setInterval(nextSlide, 4000)
+
+    clearInterval(autoplayInterval)
+
+    autoplayInterval = setInterval(() => {
+
+        if(isInteracting) return
+
+        nextSlide()
+
+    }, 4000)
+
 }
 
 function stopAutoplay(){
@@ -164,6 +174,11 @@ function stopAutoplay(){
 }
 
 function resetAutoplay(){
+
+    if(slider.matches(":hover")){
+        return
+    }
+
     stopAutoplay()
     startAutoplay()
 }
@@ -179,14 +194,41 @@ slider.addEventListener("mouseleave", startAutoplay)
 // SWIPE MOBILE
 let startX = 0
 let endX = 0
+let isInteracting = false
 
-slider.addEventListener("touchstart", (e)=>{
+// SWIPE INTERACTIONS
+slider.addEventListener("touchstart", (e) => {
+
+    isInteracting = true
+    stopAutoplay()
+
     startX = e.touches[0].clientX
+
 })
 
-slider.addEventListener("touchend", (e)=>{
+slider.addEventListener("touchmove", () => {
+
+    isInteracting = true
+
+})
+
+slider.addEventListener("touchend", (e) => {
+
     endX = e.changedTouches[0].clientX
+
     handleSwipe()
+
+    isInteracting = false
+
+    startAutoplay()
+
+})
+
+slider.addEventListener("touchcancel", () => {
+
+    isInteracting = false
+    startAutoplay()
+
 })
 
 function handleSwipe(){
@@ -204,8 +246,6 @@ function handleSwipe(){
         resetAutoplay()
     }
 }
-
-updateIndicators()
 
 })
 
