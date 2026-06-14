@@ -1,4 +1,5 @@
-/* PANEL: entrada/salida con escala */
+
+/* BACKDROP: SCALE */
 @keyframes fadeInScale {
 from { opacity: 0; transform: scale(0.97); }
 to   { opacity: 1; transform: scale(1); }
@@ -17,7 +18,7 @@ to   { opacity: 0; transform: scale(0.97); }
     animation: fadeOutScale 200ms ease-in forwards;
 }
 
-/* BACKDROP: solo cambia opacidad (no escala, no sombras cuadradas) */
+/* BACKDROP: APPEAR */
 @keyframes fadeInBackdrop {
 from { opacity: 0; }
 to   { opacity: 0.5; } /* coincide con bg-black/50 */
@@ -36,7 +37,7 @@ to   { opacity: 0; }
     animation: fadeOutBackdrop 200ms ease-in forwards;
 }
 
-/* Asegurarnos de que el backdrop y el panel cubran correctamente el área */
+/* BACKDROP: OPACITY */
 #modal-backdrop {
     will-change: opacity;
 }

@@ -75,28 +75,37 @@ document.addEventListener('keydown', function (event) {
 
 // HEADER SCRIPT
 document.addEventListener("DOMContentLoaded", function(){
-
 const track = document.getElementById("sliderTrack")
 if(!track) return
 
-const slides = track.children
+// SLIDE VARIABLES
+let slides = Array.from(track.children)
+let index = 1
+let autoplayInterval
+
+const firstClone = slides[0].cloneNode(true)
+const lastClone = slides[slides.length - 1].cloneNode(true)
 const nextBtn = document.getElementById("nextBtn")
 const prevBtn = document.getElementById("prevBtn")
 const indicatorsContainer = document.getElementById("indicators")
 const slider = document.getElementById("slider")
 
-let index = 0
-let autoplayInterval
+track.appendChild(firstClone)
+track.insertBefore(lastClone, slides[0])
+track.style.transform = `translateX(-${index * 100}%)`
+
+slides = Array.from(track.children)
 
 
 // INDICATORS
-for(let i = 0; i < slides.length; i++){
+const realSlidesCount = slides.length - 2
+for(let i = 0; i < realSlidesCount; i++){
 
     const dot = document.createElement("button")
     dot.className = "w-3 h-3 rounded-full bg-white/50 hover:bg-white transition-all duration-300 scale-100 hover:scale-125"
 
     dot.addEventListener("click", ()=>{
-        index = i
+        index = i + 1
         updateSlide()
         resetAutoplay()
     })
@@ -106,39 +115,85 @@ for(let i = 0; i < slides.length; i++){
 
 const indicators = indicatorsContainer.children
 
-
 function updateIndicators(){
 
-    for(let i = 0; i < indicators.length; i++){
-        indicators[i].classList.remove("bg-white")
-        indicators[i].classList.add("bg-white/50")
+    let activeIndex = index - 1
+
+    if(index === 0){
+        activeIndex = realSlidesCount - 1
     }
 
-    indicators[index].classList.add("bg-white")
+    if(index === slides.length - 1){
+        activeIndex = 0
+    }
+
+    for(let i = 0; i < indicators.length; i++){
+
+        indicators[i].classList.remove("bg-white")
+        indicators[i].classList.add("bg-white/50")
+
+    }
+
+    indicators[activeIndex].classList.add("bg-white")
 }
 
 
+// SLIDE CHANGER FUNCTIONS
 function updateSlide(){
     track.style.transform = `translateX(-${index * 100}%)`
     updateIndicators()
 }
 
+track.addEventListener("transitionend", (e) => {
+
+    if (e.propertyName !== "transform") return;
+
+    if(index === slides.length - 1){
+
+        track.style.transition = "none";
+
+        index = 1;
+
+        track.style.transform = `translateX(-${index * 100}%)`;
+
+        track.offsetHeight;
+
+        track.style.transition = "";
+
+    }
+
+    if(index === 0){
+
+        track.style.transition = "none";
+
+        index = slides.length - 2;
+
+        track.style.transform = `translateX(-${index * 100}%)`;
+
+        track.offsetHeight;
+
+        track.style.transition = "";
+
+    }
+
+});
 
 function nextSlide(){
+
+    if(index >= slides.length - 1) return
+
     index++
-    if(index >= slides.length){
-        index = 0
-    }
     updateSlide()
+
 }
 
-
 function prevSlide(){
+
+    if(index <= 0) return
+
     index--
-    if(index < 0){
-        index = slides.length - 1
-    }
     updateSlide()
+
 }
 
 
@@ -165,7 +220,7 @@ function startAutoplay(){
 
         nextSlide()
 
-    }, 4000)
+    }, 5000)
 
 }
 

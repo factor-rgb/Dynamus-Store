@@ -4,21 +4,24 @@
   hx-target="this"
   hx-swap="outerHTML"
 >
-  <!-- BACKDROP -->
+  <!-- Backdrop -->
   <div id="modal-backdrop" class="absolute inset-0 bg-black/50" onclick="closeModal()"></div>
-  <!-- PANEL (contenido) -->
+
+  <!-- Panel -->
   <div
     id="modal-panel"
-    class="relative z-10 bg-[#FAF7F2] rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] overflow-y-auto animate-fadeInScale"
+    class="relative z-10 bg-[#FAF7F2] rounded-2xl shadow-xl w-full max-w-lg mx-4 max-h-[80vh] flex flex-col animate-fadeInScale"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
   >
-    <!-- boton cerrar text-[#D98C5F] hover:text-[#B97249]-->
-    <div class="flex justify-between items-center border-b p-4">
-      <h5 id="modal-title" class="text-lg font-semibold">Términos y Condiciones</h5>
-      <button 
-        type="button" 
+    <!-- Head -->
+    <div class="flex justify-between items-center border-b p-4 flex-shrink-0">
+      <h5 id="modal-title" class="text-lg font-semibold">
+        Términos y Condiciones
+      </h5>
+      <button
+        type="button"
         class="text-[#D98C5F] hover:text-[#B97249] text-2xl font-semibold"
         onclick="closeModal()"
         aria-label="Cerrar"
@@ -27,8 +30,8 @@
       </button>
     </div>
 
-    <!-- Informacion -->
-    <div class="p-5 space-y-3">
+    <!-- Information with scroll -->
+    <div class="p-5 space-y-3 overflow-y-auto flex-1 border-y-2 border-amber-500">
       <p>
         Toda la información personal proporcionada por los usuarios
         será tratada con estricta confidencialidad y cuidado, conforme a las
@@ -45,9 +48,9 @@
       </p>
     </div>
 
-    <!-- boton aceptar -->
-    <div class="border-t p-4 flex justify-center">
-      <button 
+    <!-- button accept -->
+    <div class="border-t p-4 flex justify-center flex-shrink-0">
+      <button
         type="button"
         class="bg-[#D98C5F] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#B97249] transition"
         onclick="closeModal()"
