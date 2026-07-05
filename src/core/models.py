@@ -38,11 +38,34 @@ class Gender(models.Model):
         verbose_name_plural = 'Genres'
 
 
+class Pet_image_type(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+class sponsor(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Employee(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee')
     age = models.PositiveSmallIntegerField(validators=[MaxValueValidator(99)])
     access_level = models.PositiveSmallIntegerField(validators=[MaxValueValidator(5)])
+    phone = models.CharField(max_length=20, blank=True, null=True)
+
+    def clean(self):
+        from django.core.exceptions import ValidationError
+
+        if not self.phone and not self.user.email:
+            raise ValidationError(
+                "The employee must have an email address or a phone number."
+            )
 
     def __str__(self):
         return self.user.username
@@ -67,7 +90,7 @@ class Eyes_color(models.Model):
 
     def __str__(self):
         if self.right_eye_color != self.left_eye_color:
-            return f'Right {self.right_eye_color} - Left {self.left_eye_color}'
+            return f'R {self.right_eye_color} - L {self.left_eye_color}'
         return f"{self.right_eye_color}"
 
     def clean(self):
@@ -77,7 +100,7 @@ class Eyes_color(models.Model):
             if self.left_eye_color != self.right_eye_color and not self.heterochromia:
                 raise ValidationError({
                     'heterochromia': _(
-                        'Si los ojos tienen diferente color, debe activar heterocromia.'
+                        'If the eyes has unlike colors, heterochromia must be actived.'
                     )
                 })
 
@@ -108,7 +131,7 @@ class Fur(models.Model):
         related_name="fur_syles_usages"
     )
 
-    pattern = models.ForeignKey(Pattern, on_delete=models.SET_NULL, blank=True, null=True)
+    pattern = models.ForeignKey(Pattern, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.primary_color} - {self.pattern}'
@@ -154,3 +177,32 @@ class Pet(models.Model):
     
     class Meta:
         ordering = ('name', 'breed', '-entry_date')
+
+
+class Pet_image(models.Model):
+    pet = models.ForeignKey(Pet, on_delete=models.CASCADE, related_name='images')
+    type = models.ForeignKey(Pet_image_type, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='pets/')
+
+    def __str__(self):
+        return f'{self.pet} - {self.type}'
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000, blank=True, null=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    image = models.ImageField(upload_to='events/', blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class advertisement(models.Model):
+    advertiser = models.ForeignKey(sponsor, on_delete=models.CASCADE)
+    url = models.URLField(max_length=500, help_text="URL of the advertiser website")
+    image = models.ImageField(upload_to='advertisements/')
+
+    def __str__(self):
+        return f'{self.advertiser} - {self.url}'

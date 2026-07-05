@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from django.contrib.auth.views import LogoutView
 from core import views
@@ -25,3 +27,9 @@ urlpatterns = [
     path('update/<int:pk>/', PetUpdateView.as_view(), name='update'),
     path('delete/<int:pk>/', PetDeleteView.as_view(), name='delete'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL,
+        document_root=settings.MEDIA_ROOT
+    )
